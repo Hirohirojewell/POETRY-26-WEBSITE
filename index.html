@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Image Toggle</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(120deg, #ff9a9e 0%, #fecfef 50%, #ffdde1 100%);
+            background-attachment: fixed;
+            animation: fadeBackground 10s infinite alternate;
+        }
+
+        @keyframes fadeBackground {
+            0%, 100% {
+                background: linear-gradient(120deg, #ff9a9e 0%, #fecfef 50%, #ffdde1 100%);
+            }
+            50% {
+                background: linear-gradient(120deg, #fbc2eb 0%, #a18cd1 50%, #fbc2eb 100%);
+            }
+        }
+
+        #message {
+            font-size: 1.8em;
+            font-family: 'Georgia', serif;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        img {
+            display: none;
+            max-width: 90%;
+            height: auto;
+            cursor: pointer;
+            border: 5px solid rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        img.active {
+            display: block;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="message">Hi I hope this will make you feel better! You are the sunshine in my heart.</div>
+    <img id="img1" class="active" src="picture1.gif" alt="Picture 1">
+    <img id="img2" src="picture2.gif" alt="Picture 2">
+    <img id="img3" src="picture3.gif" alt="Picture 3">
+    <img id="img4" src="picture4.gif" alt="Picture 4">
+    <img id="img5" src="picture5.gif" alt="Picture 5">
+    <img id="img6" src="picture6.gif" alt="Picture 6">
+    <img id="img7" src="picture7.gif" alt="Picture 7">
+    <img id="img8" src="picture8.gif" alt="Picture 8">
+    <img id="img9" src="picture9.gif" alt="Picture 9">
+    <img id="img10" src="picture10.gif" alt="Picture 10">
+
+    <script>
+        const images = [
+            { id: "img1", message: "(1)You are the sunshine in my heart." },
+            { id: "img2", message: "(2)Every moment with you feels like a dream." },
+            { id: "img3", message: "(3)Your smile is my favorite melody." },
+            { id: "img4", message: "(4)With you, my world is complete." },
+            { id: "img5", message: "(5)You make my heart dance with joy." },
+            { id: "img6", message: "(6)You are my forever and always." },
+            { id: "img7", message: "(7)Your love is my greatest treasure." },
+            { id: "img8", message: "(8)Together, we create magic." },
+            { id: "img9", message: "(9)You are the love story I always dreamed of." },
+            { id: "img10", message: "(10)My heart belongs to you, now and forever." }
+        ];
+        
+        const messageElement = document.getElementById('message');
+        let currentIndex = 0;
+
+        function toggleImage() {
+            // Hide the current image and update the message
+            document.getElementById(images[currentIndex].id).classList.remove("active");
+            
+            // Move to the next image
+            currentIndex = (currentIndex + 1) % images.length;
+
+            // Show the next image and update the message
+            const nextImage = document.getElementById(images[currentIndex].id);
+            nextImage.classList.add("active");
+            messageElement.textContent = images[currentIndex].message;
+        }
+
+        // Add click event to all images directly
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('click', toggleImage);
+        });
+    </script>
+</body>
+</html>
